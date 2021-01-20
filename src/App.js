@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import { Input } from 'antd';
+import styled from 'styled-components';
+import MoviesList from './components/MoviesList';
+import { getMovies } from './utils/api';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const { Search } = Input;
+
+const App = () => {
+    const [movies, setMovies] = useState([]);
+
+    useEffect(() => {
+        getMovies().then((res) => setMovies(res.results));
+    }, []);
+
+    return (
+        <Container>
+            <Search placeholder="input search text" enterButton="Search" size="large" />
+            <MoviesList movies={movies} />
+        </Container>
+    );
+};
+
+const Container = styled.div`
+    width: 60%;
+    height: 100%;
+    background-color: #fff;
+    margin: 50px auto;
+    border-radius: 10px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+`;
 
 export default App;
