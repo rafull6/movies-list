@@ -1,10 +1,13 @@
-const URL = 'https://api.themoviedb.org/3/movie/popular?api_key=a5be41cb9776230a9edbf288fc44483d';
+const API_KEY = 'a5be41cb9776230a9edbf288fc44483d';
 
-export const getMovies = async () => {
+const getUrl = (resource, query = '') => `https://api.themoviedb.org/3${resource}?api_key=${API_KEY}${query}`;
+
+export const getData = async (resource, query) => {
     let result;
 
     try {
-        const response = await fetch(URL);
+        const url = getUrl(resource, query);
+        const response = await fetch(url);
         result = await response.json();
     } catch (err) {
         console.error(err);
@@ -13,3 +16,6 @@ export const getMovies = async () => {
 
     return result;
 };
+
+export const getPopularMovies = async () => getData(`/movie/popular`);
+export const findMovieByName = async (query) => getData(`/search/movie`, `&query=${query}`);
