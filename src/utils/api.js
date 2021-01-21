@@ -17,5 +17,5 @@ export const getData = async (resource, query) => {
     return result;
 };
 
-export const getPopularMovies = async () => getData(`/movie/popular`);
-export const findMovieByName = async (query) => getData(`/search/movie`, `&query=${query}`);
+export const getMoviesPopular = async () => getData(`/movie/popular`);
+export const getMoviesByName = async (query) => getData(`/search/movie`, `&query=${query}`);
