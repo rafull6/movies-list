@@ -14,15 +14,18 @@ export const addStorage = (key, value) => {
 };
 
 export const removeStorage = (key, value) => {
-    let storageElement =
+    const storageElement =
         JSON.parse(localStorage.getItem(key)) || [];
+
     if (storageElement.includes(value)) {
-        storageElement.filter((el) => el !== value);
+        const withoutElement = storageElement.filter(
+            (el) => el !== value
+        );
+        localStorage.setItem(
+            key,
+            JSON.stringify(withoutElement)
+        );
     }
-    localStorage.setItem(
-        key,
-        JSON.stringify(storageElement)
-    );
 };
 
 export const getStorage = (key) =>

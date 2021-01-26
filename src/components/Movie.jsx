@@ -11,21 +11,30 @@ import {
 const Movie = ({
     movie: { poster_path, original_title, overview, id },
 }) => {
-    const [watchLater, setWatchLater] = useState(false);
-    const [favourite, setFavourite] = useState(false);
+    const [lists, setLists] = useState({
+        watchLater: false,
+        favourite: false,
+    });
 
-    // const checkStorage = useCallback(() => {
-    //     setCheckedFav(favs.includes(id));
-    //     setCheckedLater(later.includes(id));
-    // }, [id]);
+    const onChangeWatchLater = () => {
+        updateList('wl', id);
+        checkLists();
+    };
 
-    const onChangeWatchLater = (checked) => {
-        updateList('wl', id, checked);
+    const onChangeFavourites = () => {
+        updateList('fv', id);
+        checkLists();
+    };
+
+    const checkLists = () => {
+        setLists({
+            watchLater: checkList('wl', id),
+            favourite: checkList('fv', id),
+        });
     };
 
     useEffect(() => {
-        setFavourite(checkList('fv', id));
-        setWatchLater(checkList('wl', id));
+        checkLists();
     }, []);
 
     return (
@@ -40,14 +49,14 @@ const Movie = ({
                 <SwitchContainer>
                     <span>Favourites:</span>
                     <Switch
-                        checked={favourite}
-                        onChange={updateList('fv', id)}
+                        checked={lists.favourite}
+                        onChange={onChangeFavourites}
                     />
                 </SwitchContainer>
                 <SwitchContainer>
                     <span>Watch later:</span>
                     <Switch
-                        checked={watchLater}
+                        checked={lists.watchLater}
                         onChange={onChangeWatchLater}
                     />
                 </SwitchContainer>
@@ -56,17 +65,18 @@ const Movie = ({
     );
 };
 
-const updateList = (name, id, checked) => () => {
-    if (checked) {
-        addStorage(name, id);
-    } else {
+const updateList = (name, id) => {
+    const list = checkList(name, id);
+
+    if (list) {
         removeStorage(name, id);
+    } else {
+        addStorage(name, id);
     }
 };
 
-const checkList = (name, id) => {
-    return getStorage(name).includes(id);
-};
+const checkList = (name, id) =>
+    getStorage(name).includes(id);
 
 const Container = styled.div`
     display: flex;
