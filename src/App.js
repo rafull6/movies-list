@@ -84,10 +84,10 @@ const App = () => {
                     <MoviesList movies={state.movies} />
                 </TabPane>
                 <TabPane tab={TABS.FAVOURITES} key="2">
-                    {/* <MoviesList movies={favourites} /> */}
+                    <MoviesList movies={state.favourites} />
                 </TabPane>
                 <TabPane tab={TABS.LATER} key="3">
-                    {/* <MoviesList movies={watchLater} /> */}
+                    <MoviesList movies={state.watchLater} />
                 </TabPane>
             </Tabs>
         </Container>
