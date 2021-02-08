@@ -1,6 +1,6 @@
 {
     "name": "movies-list",
-    "homepage": "https://rafull6.github.io/movies-list/",
+    "homepage": "https://rafull6.github.io/movies-list",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
