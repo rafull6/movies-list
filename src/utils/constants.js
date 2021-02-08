@@ -18,3 +18,15 @@ export const device = {
     desktop: `(min-width: ${size.desktop})`,
     desktopL: `(min-width: ${size.desktop})`,
 };
+
+export const TABS = {
+    POPULAR: 'Popular movies',
+    RESULTS: 'Search results',
+    FAVOURITES: 'Favourites',
+    LATER: 'Watch later',
+};
+
+export const LIST = {
+    WATCH_LATER: 'watchLater',
+    FAVOURITES: 'favourites',
+};

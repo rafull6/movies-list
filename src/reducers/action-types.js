@@ -1,0 +1,6 @@
+export const SET_MOVIES = 'SET_MOVIES';
+export const SET_SEARCH_VALUE = 'SET_SEARCH_VALUE';
+export const SET_LOADING = 'SET_LOADING';
+export const SET_TABNAME = 'SET_TABNAME';
+export const SET_DEBOUNCE_SUCCESS = 'SET_DEBOUNCE_SUCCESS';
+export const UPDATE_STATE_LIST = 'UPDATE_STATE_LIST';
